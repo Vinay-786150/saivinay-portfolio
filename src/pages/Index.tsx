@@ -116,9 +116,11 @@ const Index = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <div className="animate-fade-in">
             <div className="w-48 h-48 mx-auto mb-8 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 p-1">
-              <div className="w-full h-full rounded-full bg-slate-800 flex items-center justify-center text-6xl">
-                👨‍💻
-              </div>
+              <img 
+                src="/lovable-uploads/1e39e79a-8a56-45ba-a6d4-3e4fd914ad91.png" 
+                alt="Paila Saivinay"
+                className="w-full h-full rounded-full object-cover"
+              />
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
               Paila Saivinay
