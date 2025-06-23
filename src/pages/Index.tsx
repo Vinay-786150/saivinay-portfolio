@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { ArrowDown, ArrowRight, Download, ExternalLink, Mail, Phone, Github, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,9 +6,11 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
+import emailjs from '@emailjs/browser';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,12 +42,44 @@ const Index = () => {
     }
   };
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast({
-      title: "Message sent!",
-      description: "Thank you for your message. I'll get back to you soon.",
-    });
+    setIsSubmitting(true);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    
+    const templateParams = {
+      from_name: formData.get('name') as string,
+      from_email: formData.get('email') as string,
+      message: formData.get('message') as string,
+      to_name: 'Paila Saivinay',
+    };
+
+    try {
+      await emailjs.send(
+        'service_90ms28l', // Your service ID
+        'template_onndjkv', // Your template ID
+        templateParams,
+        'd8qydAXymWx7R2EK4' // Your public key
+      );
+      
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for your message. I'll get back to you soon.",
+      });
+      
+      form.reset();
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      toast({
+        title: "Failed to send message",
+        description: "Please try again or contact me directly via email.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const skills = [
@@ -178,11 +211,11 @@ const Index = () => {
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                  <span className="text-gray-300">Machine Learning Explorer</span>
+                  <span>Machine Learning Explorer</span>
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                  <span className="text-gray-300">Problem Solving Oriented</span>
+                  <span>Problem Solving Oriented</span>
                 </div>
               </div>
             </div>
@@ -413,17 +446,20 @@ const Index = () => {
               <CardContent>
                 <form onSubmit={handleContactSubmit} className="space-y-4">
                   <Input 
+                    name="name"
                     placeholder="Your Name" 
                     className="bg-slate-700 border-slate-600 text-white placeholder-gray-400 focus:border-cyan-400"
                     required
                   />
                   <Input 
+                    name="email"
                     type="email" 
                     placeholder="Your Email" 
                     className="bg-slate-700 border-slate-600 text-white placeholder-gray-400 focus:border-cyan-400"
                     required
                   />
                   <Textarea 
+                    name="message"
                     placeholder="Your Message" 
                     rows={4}
                     className="bg-slate-700 border-slate-600 text-white placeholder-gray-400 focus:border-cyan-400"
@@ -431,9 +467,10 @@ const Index = () => {
                   />
                   <Button 
                     type="submit"
-                    className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-semibold py-3 rounded-full transition-all duration-300 hover:scale-105"
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-semibold py-3 rounded-full transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </Button>
                 </form>
               </CardContent>
