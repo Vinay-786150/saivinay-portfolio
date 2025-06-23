@@ -78,7 +78,7 @@ const ContactSection = () => {
                 <div className="flex items-center space-x-4">
                   <Linkedin className="h-6 w-6 text-cyan-400" />
                   <a 
-                    href="https://www.linkedin.com/in/sai-vinay-reddy-4750aa251/" 
+                    href="https://www.linkedin.com/in/saivinay-paila" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-gray-300 hover:text-cyan-400 transition-colors duration-200"

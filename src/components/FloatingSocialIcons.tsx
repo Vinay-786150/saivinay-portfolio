@@ -13,7 +13,7 @@ const FloatingSocialIcons = () => {
         <Github className="h-6 w-6 text-white" />
       </a>
       <a 
-        href="https://www.linkedin.com/in/sai-vinay-reddy-4750aa251/" 
+        href="https://www.linkedin.com/in/saivinay-paila" 
         target="_blank" 
         rel="noopener noreferrer"
         className="block w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-500 transition-all duration-300 hover:scale-110"
