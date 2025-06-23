@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Download, Mail, Phone, Github, Linkedin } from 'lucide-react';
+import { Mail, Phone, Github, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -99,10 +99,6 @@ const ContactSection = () => {
                 </div>
               </div>
             </div>
-            <Button className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105">
-              <Download className="mr-2 h-5 w-5" />
-              Download Resume
-            </Button>
           </div>
           <Card className="bg-slate-800/50 border-slate-700">
             <CardHeader>
